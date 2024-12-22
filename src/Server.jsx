@@ -4,6 +4,7 @@ import ReactDomServer from 'react-dom/server'
 import fs from 'fs'
 
 import App from './App.jsx'
+import NavBar from './Nav/NavBar.jsx'
 
 const PORT = process.env.PORT || 3000
 
@@ -13,6 +14,7 @@ const createReactApp = async (location) => {
 
     const reactApp = ReactDomServer.renderToString(
         <StaticRouter location={location}>
+            <NavBar />
             <App />
         </StaticRouter>
     )

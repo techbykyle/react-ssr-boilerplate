@@ -1,17 +1,13 @@
 import { Route, Routes } from 'react-router-dom'
-import Home from './Home/Home.jsx'
-import About from './About/About.jsx'
-import NavBar from './Nav/NavBar.jsx'
+import Home from './Home/Home'
+import About from './About/About'
 
 const App = () => {
 
-    return <main>
-        <NavBar />
-        <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-        </Routes>
-    </main>
+    return <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+    </Routes>
 }
 
 export default App

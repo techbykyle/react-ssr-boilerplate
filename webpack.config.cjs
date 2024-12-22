@@ -1,6 +1,8 @@
 const path = require('path')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const nodeExternals = require('webpack-node-externals')
+const ENABLE_SSR = process.env.ENABLE_SSR === 'true' ? true : false
+const client_public_path = !ENABLE_SSR ? '/': '/static'
 
 const babelLoader = {
     rules: [
@@ -26,17 +28,22 @@ const resolve = {
 
 const clientConfig = {
     name: 'client',
-    devServer: {
+    devServer: ENABLE_SSR ? {} :{
         port: 3002,
         hot: true,
-        compress: true
+        compress: true,
+        historyApiFallback: true,
+        static: {
+            directory: path.join(__dirname, 'static'),
+            publicPath: client_public_path,
+        },
     },
     target: 'web',
     mode: 'development',
-    entry: './src/client.jsx',
+    entry: './src/Client.jsx',
     output: {
         path: path.join(__dirname, '/dist'),
-        publicPath: '/static',
+        publicPath: '/',
         filename: 'client.js',
     },
     module: babelLoader,
@@ -52,7 +59,7 @@ const serverConfig = {
     name: 'server',
     mode: 'development',
     target: 'node',
-    entry: './src/server.jsx',
+    entry: './src/Server.jsx',
     output: {
         path: path.join(__dirname, '/dist'),
         filename: 'server.cjs',

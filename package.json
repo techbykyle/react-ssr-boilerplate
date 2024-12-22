@@ -18,8 +18,8 @@
   "contributors": [],
   "scripts": {
     "clean": "rm -rf ./dist",
-    "dev": "npm run clean && webpack serve --mode=development",
-    "server": "ENABLE_SSR=true; npm run clean && webpack --config webpack.config.cjs && node ./dist/server.cjs"
+    "dev": "export ENABLE_SSR=false && npm run clean && webpack serve --config webpack.config.cjs --config-name client --mode=development",
+    "server": "export ENABLE_SSR=true && npm run clean && webpack --config webpack.config.cjs && node ./dist/server.cjs"
   },
   "devDependencies": {
     "@babel/preset-env": "7.24.8",
