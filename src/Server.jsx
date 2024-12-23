@@ -1,3 +1,4 @@
+import React from 'react'
 import express from 'express'
 import {StaticRouter} from 'react-router-dom/server'
 import ReactDomServer from 'react-dom/server'
@@ -7,16 +8,17 @@ import App from './App.jsx'
 import NavBar from './Nav/NavBar.jsx'
 
 const PORT = process.env.PORT || 3000
-
 const app = express()
 
 const createReactApp = async (location) => {
 
     const reactApp = ReactDomServer.renderToString(
-        <StaticRouter location={location}>
-            <NavBar />
-            <App />
-        </StaticRouter>
+        <React.StrictMode>
+            <StaticRouter location={location}>
+                <NavBar />
+                <App />
+            </StaticRouter>
+        </React.StrictMode>
     )
 
     const html = await fs.promises.readFile(`${__dirname}/index.html`, 'utf-8')
@@ -24,7 +26,6 @@ const createReactApp = async (location) => {
     
     return reactHtlm
 }
-
 
 app.use('/static', express.static(__dirname))
 

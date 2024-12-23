@@ -43,7 +43,7 @@ const clientConfig = {
     entry: './src/Client.jsx',
     output: {
         path: path.join(__dirname, '/dist'),
-        publicPath: '/',
+        publicPath: client_public_path,
         filename: 'client.js',
     },
     module: babelLoader,
